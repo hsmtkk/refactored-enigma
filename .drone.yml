@@ -1,0 +1,24 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: yml_lint
+    depends_on:
+      - clone
+    image: sdesbure/yamllint:latest
+    commands:
+      - yamllint .drone.yml
+  - name: rust_lint
+    depends_on:
+      - clone
+    image: rust:1.53
+    commands:
+      - cargo clippy
+  - name: rust_test
+    depends_on:
+      - clone
+    image: rust:1.53
+    commands:
+      - cargo test
