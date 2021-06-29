@@ -15,6 +15,7 @@ steps:
       - clone
     image: rust:1.53
     commands:
+      - rustup component add clippy
       - cargo clippy
   - name: rust_test
     depends_on:
