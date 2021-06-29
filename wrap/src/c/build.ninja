@@ -1,0 +1,12 @@
+rule compile_o
+  command = gcc -Wall -c -o $out $in
+
+rule compile_so
+  command = gcc -Wall -fPIC -shared -o $out $in -lm
+
+rule link
+  command = gcc -L. -o $out main.o -lm -lwrap
+
+build libwrap.so: compile_so wrap.c
+build main.o: compile_o main.c 
+build main.bin: link main.o libwrap.so
