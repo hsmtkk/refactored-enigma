@@ -1,2 +1,2 @@
 [workspace]
-members = ["wrap"]
+members = ["wrap", "user"]
